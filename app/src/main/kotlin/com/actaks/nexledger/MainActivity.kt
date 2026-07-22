@@ -15,6 +15,7 @@ import com.actaks.nexledger.core.datastore.NexLedgerPreferences
 import com.actaks.nexledger.core.designsystem.theme.NexLedgerTheme
 import com.actaks.nexledger.core.domain.ThemeMode
 import com.actaks.nexledger.core.navigation.NexledgerNavigationRoot
+import com.actaks.nexledger.feature.notifications.NotificationPermissionGate
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.core.context.GlobalContext
@@ -45,7 +46,9 @@ class MainActivity : ComponentActivity() {
             val useDynamicColors by prefs.useDynamicColors.collectAsState(initial = false)
             NexLedgerTheme(themeMode = themeMode, useDynamicColors = useDynamicColors) {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    NexledgerNavigationRoot()
+                    NotificationPermissionGate {
+                        NexledgerNavigationRoot()
+                    }
                 }
             }
         }

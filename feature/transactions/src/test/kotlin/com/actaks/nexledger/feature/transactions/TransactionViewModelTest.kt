@@ -1,14 +1,14 @@
 package com.actaks.nexledger.feature.transactions
 
 import app.cash.turbine.test
-import com.nexledger.core.database.entity.AccountEntity
-import com.nexledger.core.database.entity.CategoryEntity
-import com.nexledger.core.database.entity.TransactionEntity
-import com.nexledger.core.database.repository.AccountRepository
-import com.nexledger.core.database.repository.CategoryRepository
-import com.nexledger.core.database.repository.TransactionRepository
-import com.nexledger.core.model.AccountType
-import com.nexledger.core.model.TransactionType
+import com.actaks.nexledger.core.database.repository.AccountRepository
+import com.actaks.nexledger.core.database.repository.CategoryRepository
+import com.actaks.nexledger.core.database.repository.TransactionRepository
+import com.actaks.nexledger.core.model.Account
+import com.actaks.nexledger.core.model.AccountType
+import com.actaks.nexledger.core.model.Category
+import com.actaks.nexledger.core.model.Transaction
+import com.actaks.nexledger.core.model.TransactionType
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +37,7 @@ class TransactionViewModelTest {
 
     private lateinit var viewModel: TransactionViewModel
 
-    private val sampleTx = TransactionEntity(
+    private val sampleTx = Transaction(
         id = 1,
         amount = 250.0,
         type = TransactionType.EXPENSE,
@@ -54,7 +54,7 @@ class TransactionViewModelTest {
         coEvery { transactionRepo.getAll() } returns flowOf(listOf(sampleTx))
         coEvery { categoryRepo.getAll() } returns flowOf(
             listOf(
-                CategoryEntity(
+                Category(
                     id = 1,
                     name = "Food",
                     type = TransactionType.EXPENSE
@@ -63,7 +63,7 @@ class TransactionViewModelTest {
         )
         coEvery { accountRepo.getAll() } returns flowOf(
             listOf(
-                AccountEntity(
+                Account(
                     id = 1,
                     name = "Wallet",
                     type = AccountType.WALLET,
