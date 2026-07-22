@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- N -->
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="
+        M22,82
+        L22,26
+        L34,26
+        L70,66
+        L70,26
+        L86,26
+        L86,82
+        L74,82
+        L38,42
+        L38,82
+        Z"/>
+
+    <!-- Rupee -->
+
+    <path
+        android:fillColor="#FBBF24"
+        android:pathData="
+        M48,24
+        H78
+        V30
+        H57
+        C64,30 69,34 70,39
+        H78
+        V45
+        H70
+        C68,53 61,58 49,58
+        L69,82
+        H59
+        L40,59
+        V54
+        H48
+        C57,54 61,50 63,45
+        H40
+        V39
+        H63
+        C61,34 56,30 49,30
+        H40
+        V24
+        Z"/>
+
+</vector>

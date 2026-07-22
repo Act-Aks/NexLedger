@@ -1,0 +1,35 @@
+build:
+  maxIssues: 0
+
+style:
+  MagicNumber:
+    active: false
+  MaxLineLength:
+    maxLineLength: 140
+  WildcardImport:
+    active: false
+  UnusedImports:
+    active: true
+  ForbiddenComment:
+    active: true
+    values: [ "TODO:", "FIXME:", "STOPSHIP:" ]
+
+complexity:
+  LongParameterList:
+    functionThreshold: 8
+    constructorThreshold: 8
+
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+
+naming:
+  PackageNaming:
+    active: true
+  ClassNaming:
+    active: true
+  FunctionNaming:
+    active: true
+
+formatting:
+  active: false

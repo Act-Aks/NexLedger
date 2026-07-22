@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="budgets">Budgets</string>
+    <string name="add_budget">Add Budget</string>
+    <string name="edit_budget">Edit Budget</string>
+    <string name="budget_empty_title">No budgets set</string>
+    <string name="budget_empty_description">Add spending limits for your categories</string>
+    <string name="category">Category</string>
+    <string name="percent_used">% used</string>
+    <string name="back">Back</string>
+    <string name="monthly_limit">Monthly Limit</string>
+    <string name="saving">Saving...</string>
+    <string name="save_budget">Save Budget</string>
+</resources>

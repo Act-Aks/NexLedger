@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="delete_account">Delete Account</string>
+    <string name="delete_account_description">Deleting this account will also remove all its transactions. This cannot be undone.</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="accounts">Accounts</string>
+    <string name="add_account">Add Account</string>
+    <string name="no_accounts_yet">No accounts yet</string>
+    <string name="empty_account_description">Add your cash, bank, or wallet accounts</string>
+    <string name="total_balance">Total Balance</string>
+
+    <string name="account_type">Account Type</string>
+    <string name="edit_account">Edit Account</string>
+    <string name="back">Back</string>
+    <string name="account_name">Account Name</string>
+    <string name="initial_balance">Initial Balance</string>
+    <string name="save_account">Save Account</string>
+    <string name="saving">Saving...</string>
+</resources>

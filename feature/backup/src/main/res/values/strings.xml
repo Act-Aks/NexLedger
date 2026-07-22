@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="backup">Backup</string>
+    <string name="ok">OK</string>
+    <string name="backup_and_restore">Backup &amp; Restore</string>
+    <string name="backup_description">Your data stays on your device. Export creates local backup files you can restore later.</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="export">Export</string>
+    <string name="export_json">Export JSON</string>
+    <string name="export_csv">Export CSV</string>
+    <string name="restore">Restore</string>
+    <string name="importing">Importing...</string>
+    <string name="import_json_backup">Import JSON Backup</string>
+</resources>
