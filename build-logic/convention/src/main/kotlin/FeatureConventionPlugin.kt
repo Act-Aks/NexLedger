@@ -33,8 +33,7 @@ class FeatureConventionPlugin : Plugin<Project> {
                 "implementation"(lib("koin.android"))
                 "implementation"(lib("koin.compose"))
                 "implementation"(lib("kotlinx.coroutines.android"))
-
-                "debugImplementation"(lib("compose.ui.tooling"))
+                "implementation"(lib("compose.ui.tooling"))
                 "debugImplementation"(lib("compose.ui.tooling.preview"))
 
                 "testImplementation"(lib("junit"))
