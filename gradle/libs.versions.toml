@@ -18,7 +18,7 @@ navigation3 = "1.1.4"
 lifecycleNavigation3 = "2.11.0"
 koin = "4.2.2"
 koinCompose = "4.2.2"
-detekt = "1.23.8"
+detekt = "2.0.0-alpha.5"
 splashscren = "1.2.0"
 
 # Testing
@@ -101,6 +101,7 @@ android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", ve
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
 kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 ksp-gradle-plugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+detekt-gradle-plugin = { group = "dev.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -109,7 +110,8 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+detekt = { id = "dev.detekt", version.ref = "detekt" }
 
 nexledger-android-library = { id = "com.actaks.nexledger.android.library", version = "unspecified" }
 nexledger-feature = { id = "com.actaks.nexledger.feature", version = "unspecified" }
+nexledger-detekt = { id = "com.actaks.nexledger.detekt", version = "unspecified" }

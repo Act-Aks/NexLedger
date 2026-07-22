@@ -94,24 +94,34 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/develop' }}
 
-      - name: Build debug APK
-        run: ./gradlew :app:assembleDebug --stacktrace
+      # 1) Recreate the keystore (.jks) from base64 secret
+      - name: Create keystore file
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
+        run: |
+          mkdir -p app
+          echo "$KEYSTORE_BASE64" | base64 -d > $KEYSTORE_PATH
+
+      # 2) Recreate keystore.properties from secrets
+      - name: Create keystore.properties
+        run: |
+          cat > keystore.properties <<EOF
+          storeFile=${{ secrets.KEYSTORE_FILE_PATH }}
+          storePassword=${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          keyAlias=${{ secrets.KEYSTORE_KEY_ALIAS }}
+          keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          EOF
 
       - name: Build release APK
         run: ./gradlew :app:assembleRelease --stacktrace
-
-      - name: Upload debug APK
-        uses: actions/upload-artifact@v7
-        with:
-          name: debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload release APK
         if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v7
         with:
           name: release-apk
-          path: app/build/outputs/apk/release/app-release.apk
+          path: app/build/outputs/apk/release/*.apk
 
   # ── GitHub Release (tag v*) ──
   release:

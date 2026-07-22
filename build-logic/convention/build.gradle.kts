@@ -27,6 +27,7 @@ dependencies {
     compileOnly(libs.android.tools.common)
     compileOnly(libs.kotlin.gradle.plugin)
     compileOnly(libs.ksp.gradle.plugin)
+    compileOnly(libs.detekt.gradle.plugin)
 }
 
 gradlePlugin {
@@ -38,6 +39,10 @@ gradlePlugin {
         register("feature") {
             id = "com.actaks.nexledger.feature"
             implementationClass = "FeatureConventionPlugin"
+        }
+        register("detekt") {
+            id = "com.actaks.nexledger.detekt"
+            implementationClass = "DetektConventionPlugin"
         }
     }
 }

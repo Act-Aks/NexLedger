@@ -12,6 +12,7 @@ class FeatureConventionPlugin : Plugin<Project> {
         with(pluginManager) {
             apply(pluginId("nexledger.android.library"))
             apply(pluginId("kotlin.compose"))
+            apply(pluginId("nexledger.detekt"))
 
             extensions.getByType<LibraryExtension>().apply {
                 buildFeatures { compose = true }

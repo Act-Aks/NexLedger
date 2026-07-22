@@ -9,7 +9,10 @@ import org.gradle.kotlin.dsl.getByType
 class AndroidLibraryConventionPlugin : Plugin<Project> {
 
     override fun apply(target: Project) = with(target) {
-        pluginManager.apply(pluginId("android.library"))
+        with(pluginManager) {
+            apply(pluginId("android.library"))
+            apply(pluginId("nexledger.detekt"))
+        }
 
         extensions.getByType<LibraryExtension>().apply {
             compileSdk = 37
