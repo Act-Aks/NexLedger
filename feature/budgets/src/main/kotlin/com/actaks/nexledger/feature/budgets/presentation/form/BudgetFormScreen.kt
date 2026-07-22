@@ -106,14 +106,19 @@ private fun BudgetFormScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .menuAnchor(),
-                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) })
+                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) }
+                    )
                     ExposedDropdownMenu(
-                        expanded = expanded, onDismissRequest = { expanded = false }) {
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }) {
                         state.categories.forEach { category ->
-                            DropdownMenuItem(text = { Text(category.name) }, onClick = {
-                                onAction(BudgetFormAction.OnCategorySelect(category.id))
-                                expanded = false
-                            })
+                            DropdownMenuItem(
+                                text = { Text(category.name) },
+                                onClick = {
+                                    onAction(BudgetFormAction.OnCategorySelect(category.id))
+                                    expanded = false
+                                }
+                            )
                         }
                     }
                 }

@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.TrendingDown
+import androidx.compose.material.icons.automirrored.rounded.TrendingUp
 import androidx.compose.material.icons.rounded.AccountBalance
-import androidx.compose.material.icons.rounded.TrendingDown
-import androidx.compose.material.icons.rounded.TrendingUp
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -41,7 +41,7 @@ fun NexSummaryRow(
             label = "Income",
             value = income,
             currencyCode = currencyCode,
-            icon = Icons.Rounded.TrendingUp,
+            icon = Icons.AutoMirrored.Rounded.TrendingUp,
             modifier = Modifier.weight(1f),
             valueColor = MaterialTheme.colorScheme.primary
         )
@@ -50,7 +50,7 @@ fun NexSummaryRow(
             label = "Expenses",
             value = expenses,
             currencyCode = currencyCode,
-            icon = Icons.Rounded.TrendingDown,
+            icon = Icons.AutoMirrored.Rounded.TrendingDown,
             modifier = Modifier.weight(1f),
             valueColor = MaterialTheme.colorScheme.error
         )
