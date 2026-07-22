@@ -1,241 +1,269 @@
 <div align="center">
 
-<img src="https://img.shields.io/badge/Kotlin-2.1.0-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin" />
-<img src="https://img.shields.io/badge/Compose-Material%203-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white" alt="Compose" />
-<img src="https://img.shields.io/badge/Navigation-3-34A853?style=for-the-badge&logo=android&logoColor=white" alt="Navigation 3" />
-<img src="https://img.shields.io/badge/DI-Koin-FF4081?style=for-the-badge&logo=insert-koin&logoColor=white" alt="Koin" />
-<img src="https://img.shields.io/badge/DB-Room-FF6D00?style=for-the-badge&logo=sqlite&logoColor=white" alt="Room" />
+# 💎 NexLedger
 
-<br /><br />
+### Offline‑first personal finance manager built with Kotlin & Jetpack Compose
 
-<img src="https://raw.githubusercontent.com/tandpfun/skill-icons/main/icons/Kotlin-Dark.svg" width="48" />
-<h1>NexLedger</h1>
+Take control of your money without logins, accounts, or cloud sync.  
+Everything stays on your device — private, fast, and beautiful.
 
-<h3>💎 Premium Offline-First Personal Finance Manager</h3>
+<br>
 
-<p>
-  <b>Private.</b> No cloud. No accounts. No tracking.<br />
-  <b>Fast.</b> Reactive Room database. Compose UI.<br />
-  <b>Beautiful.</b> Material 3. Light, Dark, AMOLED themes.<br />
-  <b>Complete.</b> Expenses, Income, Budgets, Goals, Reports, Charts.
-</p>
+<!-- CI / quality badges (jobs from nexledger-ci.yml) -->
+[![Build](https://github.com/Act-Aks/NexLedger/actions/workflows/nexledger-ci.yml/badge.svg?job=build)](https://github.com/Act-Aks/NexLedger/actions/workflows/nexledger-ci.yml)
+[![Unit Tests](https://github.com/Act-Aks/NexLedger/actions/workflows/nexledger-ci.yml/badge.svg?job=unit-tests)](https://github.com/Act-Aks/NexLedger/actions/workflows/nexledger-ci.yml)
+[![Lint](https://github.com/Act-Aks/NexLedger/actions/workflows/nexledger-ci.yml/badge.svg?job=lint)](https://github.com/Act-Aks/NexLedger/actions/workflows/nexledger-ci.yml)
+
+<!-- Project / repo badges -->
+[![Release](https://img.shields.io/github/v/release/Act-Aks/NexLedger?style=flat-square)](https://github.com/Act-Aks/NexLedger/releases)
+[![Downloads](https://img.shields.io/github/downloads/Act-Aks/NexLedger/total?style=flat-square)](https://github.com/Act-Aks/NexLedger/releases)
+[![Last Commit](https://img.shields.io/github/last-commit/Act-Aks/NexLedger?style=flat-square)](https://github.com/Act-Aks/NexLedger/commits/main)
+[![Issues](https://img.shields.io/github/issues/Act-Aks/NexLedger?style=flat-square)](https://github.com/Act-Aks/NexLedger/issues)
+[![Stars](https://img.shields.io/github/stars/Act-Aks/NexLedger?style=social)](https://github.com/Act-Aks/NexLedger/stargazers)
+[![License](https://img.shields.io/github/license/Act-Aks/NexLedger?style=flat-square)](LICENSE)
+
+<br>
+
+<!-- Tech badges -->
+<img src="https://img.shields.io/badge/Kotlin-2.1-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" />
+<img src="https://img.shields.io/badge/Compose-Material3-4285F4?style=for-the-badge&logo=jetpackcompose" />
+<img src="https://img.shields.io/badge/Room-Database-FF6D00?style=for-the-badge&logo=sqlite" />
+<img src="https://img.shields.io/badge/Koin-DI-FF4081?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Navigation3-Latest-34A853?style=for-the-badge" />
+
+<br>
+
+[▶️ Download latest APK](https://github.com/Act-Aks/NexLedger/releases) ·
+[📱 Screenshots](#-screenshots) ·
+[✨ Features](#-features) ·
+[🧱 Architecture](#-architecture)
 
 </div>
 
 ---
 
+## 📱 Screenshots
+
+> Replace these with your real screenshots (e.g. `docs/...`).
+
+| Dashboard               | Transactions               | Reports               |
+|-------------------------|----------------------------|-----------------------|
+| ![](docs/dashboard.png) | ![](docs/transactions.png) | ![](docs/reports.png) |
+
+Seeing the UI is the quickest way to understand what NexLedger offers.
+
+---
+
+## ❤️ Why NexLedger?
+
+Most finance apps want your email, your account, and your data. NexLedger doesn’t.
+
+- ✅ No account or signup
+- ✅ No ads or trackers
+- ✅ No analytics
+- ✅ No cloud sync
+- ✅ Works completely offline
+- ✅ Fast, modern Material 3 interface
+
+If you care about privacy and still want rich, actionable insights into your spending and savings,
+NexLedger is for you.
+
+---
+
 ## ✨ Features
 
-<table>
-<tr>
-  <td width="50%">
+High‑level overview:
 
-### 📊 Dashboard
-At-a-glance financial health — total balance, monthly income/expenses, recent transactions, budget progress bars. Pull-to-refresh, FAB for quick-add.
+- 💳 Multiple accounts (cash, bank, wallet, credit card, savings)
+- 💸 Income & expense tracking
+- 📊 Budget management with progress bars & alerts
+- 🎯 Savings goals with deadlines and reminders
+- 📈 Reports & analytics (monthly/yearly, categories, net savings)
+- 🔎 Powerful search & filters (type, category, account, date range)
+- 💾 JSON & CSV backup & restore
+- 🔒 PIN & biometric authentication
+- 🌙 Light, Dark & AMOLED themes + dynamic colors
+- 🔔 Smart reminders (budgets, goals, recurring bills)
+- 🚀 Offline‑first, Room‑backed storage
+
+More detail, for readers who scroll:
 
 ### 💳 Accounts
-Track Cash, Bank, Wallet, Credit Card & Savings accounts. Real-time balance tracking with transfer support. Swipe to delete with confirmation.
+
+Track Cash, Bank, Wallet, Credit Card, and Savings accounts with real‑time balances. Transfers keep
+accounts in sync, and swipe‑to‑delete always confirms before removing anything important.
 
 ### 🔖 Transactions
-Full CRUD with search, filter (type / category / account / date range), sort (date / amount). Merchant name, notes, date picker. Category & account dropdowns.
 
-  </td>
-  <td width="50%">
+Create, edit, and browse transactions with full‑text search and filters (type, category, account,
+date range). Add merchants and notes, and pick categories/accounts with lightweight, Compose‑based
+dropdowns.
 
-### 🏷️ Categories
-Income & expense categories with custom icons and color picker. Tabbed view. Default presets included.
+### 🎯 Budgets & Goals
 
-### 🎯 Budgets
-Monthly category spending limits. Visual progress bars with color-coded alerts (green → yellow → red). WorkManager background alerts at 90%+.
-
-### 🏆 Goals
-Savings targets with deadline tracking. Progress visualization. Deadline reminder notifications 7 days out.
+Set monthly spending limits per category and watch progress with clear, color‑coded bars (green →
+yellow → red). Define savings goals with target amounts and deadlines, plus 7‑day reminder
+notifications.
 
 ### 📈 Reports & Statistics
-Monthly / yearly income–expense–savings reports. Category spending breakdown with percentage bars. Net savings analysis.
 
-  </td>
-</tr>
-<tr>
-  <td width="100%" colspan="2">
+See monthly and yearly income–expense–savings reports at a glance. Drill down into category
+breakdowns and net savings, so it’s easy to understand where your money is going.
 
 ### 🔍 Search & Filters
-Full-text search across notes and merchants. Type/category/account filter chips. Date range filtering.
+
+Use full‑text search across notes and merchants, plus type/category/account chips and date‑range
+filtering. The transactions list remains smooth thanks to client‑side filtering on reactive data.
 
 ### 💾 Backup & Restore
-JSON & CSV export via Storage Access Framework (file picker). JSON import restore with data validation. All local — no cloud.
 
-### 🔒 Security
-Optional 4-digit PIN lock with confirmation flow. Biometric (fingerprint) unlock. Data never leaves the device.
+Export JSON and CSV via the Storage Access Framework. Import JSON with validation to restore your
+data safely. Everything is local — NexLedger doesn’t talk to any servers.
 
-### 🎨 Theming
-Light, Dark, AMOLED, System-follow themes. Material You dynamic colors on Android 12+. Edge-to-edge rendering.
+### 🔒 Security & Theming
 
-### 🔔 Notifications
-Background budget alerts, goal deadline reminders, and recurring bill reminders via WorkManager periodic daily checks.
-
-  </td>
-</tr>
-</table>
-
----
-
-## 🧱 Architecture
-
-```
-┌──────────────────────┐
-│   Compose Screen     │  observes StateFlow<State>
-└──────────┬───────────┘
-           │ Action (sealed interface)
-           ▼
-┌──────────────────────┐
-│   ViewModel           │  @Koin viewModel { }
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│   Repository          │  Interface → Impl (Koin singleton)
-└──────────┬───────────┘
-           │
-           ▼
-┌──────────────────────┐
-│   Room / DataStore    │  6 entities · 6 DAOs · indexed FKs
-└──────────────────────┘
-```
-
-> **MVI** (Model-View-Intent) — every screen: `State.kt` → `Action.kt` → `ViewModel.kt` → `Screen.kt`
-
----
-
-## 📦 Tech Stack
-
-| Layer | Technology |
-|:------|:-----------|
-| Language | **Kotlin** 2.1 |
-| UI Toolkit | **Jetpack Compose** + Material 3 |
-| Navigation | **Navigation 3** (`androidx.navigation3:*`) |
-| DI | **Koin** 4.0 |
-| Database | **Room** 2.6 |
-| Preferences | **DataStore** |
-| Background | **WorkManager** |
-| Serialization | **kotlinx.serialization** |
-| Build | **Gradle KTS** + Version Catalog |
-| Testing | JUnit · MockK · Turbine · Compose UI Test |
-| CI/CD | **GitHub Actions** (lint, test, build, release) |
-| Quality | **Detekt** static analysis |
-
----
-
-## 🗂️ Module Map
-
-```
-NexLedger (22 modules, 140+ Kotlin files)
-
-app/                              Application + MainActivity
-
-core/
-├── common/                       DateUtils, extensions
-├── model/                        6 domain models
-├── database/                     6 entities + 6 DAOs + 12 repos + DI
-├── datastore/                    Preferences (theme, security, currency)
-├── design-system/                M3 theme — Light/Dark/AMOLED/Dynamic
-├── navigation/                   Nav3 routes + NavDisplay + bottom bar
-└── ui/                           Reusable: SummaryCard, TxRow, EmptyState, ErrorState
-
-features/
-├── dashboard/                    Summary, recent txs, budget bars
-├── transactions/                 List + Form + Detail (12 files)
-├── accounts/                     List + Form (8 files)
-├── categories/                   List + Form (8 files)
-├── budgets/                      List + Form (8 files)
-├── goals/                        List + Form (8 files)
-├── reports/                      Income/expense summary
-├── statistics/                   Category breakdown charts
-├── search/                       Full-text + filters
-├── backup/                       JSON/CSV export + import
-├── settings/                     Theme, security nav, currency
-├── security/                     PIN setup numpad, biometric
-└── notifications/                WorkManager daily checks
-```
+Secure access with a 4‑digit PIN and biometric unlock using Android `BiometricPrompt`. Pick Light,
+Dark, AMOLED, or system‑follow themes, and enjoy Material You dynamic colors on Android 12+.
 
 ---
 
 ## 🚀 Quick Start
+
+Minimal steps to get going:
 
 ```bash
 # Clone
 git clone https://github.com/Act-Aks/NexLedger.git
 cd NexLedger
 
-# Generate Gradle wrapper
-gradle wrapper --gradle-version 8.11.1
+# Build debug APK + run core checks
+./gradlew assembleDebug test lint detekt
+```
 
-# Build debug APK
-./gradlew assembleDebug
+Open in **Android Studio Hedgehog+** → `File` → `Open` → select `NexLedger/` → Sync → Run.
 
-# Run unit tests
-./gradlew test
+Instrumented tests (API 34 emulator):
 
-# Static analysis
-./gradlew lint detekt
-
-# Instrumented tests (needs emulator)
+```bash
 ./gradlew connectedCheck
 ```
 
-Open in **Android Studio Hedgehog+** → File → Open → select `NexLedger/` → Sync → Run.
+---
+
+## 🛠 Tech Stack
+
+|               |                                             |
+|---------------|---------------------------------------------|
+| Language      | Kotlin 2.1                                  |
+| UI            | Jetpack Compose + Material 3                |
+| Navigation    | Navigation 3 (`androidx.navigation3:*`)     |
+| Database      | Room 2.6                                    |
+| DI            | Koin 4.0                                    |
+| Preferences   | DataStore                                   |
+| Background    | WorkManager                                 |
+| Serialization | kotlinx.serialization                       |
+| Build         | Gradle KTS + Version Catalog                |
+| Testing       | JUnit · MockK · Turbine · Compose UI Test   |
+| CI            | GitHub Actions (lint, test, build, release) |
+| Quality       | Detekt static analysis                      |
 
 ---
 
-## 🔄 CI Pipeline
+## 📦 Project Structure
 
+Technical depth is available, but folded by default:
+
+<details>
+<summary>📦 Modules & folders</summary>
+
+```text
+app/
+
+core/
+├── common          # Date utils, extensions
+├── database        # Room entities, DAOs, repositories
+├── datastore       # DataStore (theme, security, currency)
+├── design-system   # Material 3 theme — Light/Dark/AMOLED/Dynamic
+├── model           # Domain models
+├── navigation      # Navigation 3 routes, bottom bar
+└── ui              # Reusable UI: cards, rows, empty/error states
+
+features/
+├── dashboard       # Summary, recent txs, budget bars
+├── transactions    # List, form, detail
+├── accounts        # List, form
+├── categories      # List, form
+├── budgets         # List, form
+├── goals           # List, form
+├── reports         # Income/expense summary
+├── statistics      # Category breakdown charts
+├── search          # Full-text + filters
+├── backup          # JSON/CSV export + import
+├── settings        # Theme, security, currency
+├── security        # PIN setup numpad, biometric
+└── notifications   # WorkManager daily checks
 ```
-┌──────────┐    ┌───────────┐    ┌──────────────────┐    ┌───────────────┐
-│  Lint +  │───▶│   Unit    │───▶│  Instrumented    │───▶│  Build Debug  │
-│  Detekt  │    │   Tests   │    │  Tests (API 34)  │    │  + Release    │
-└──────────┘    └───────────┘    └──────────────────┘    └───────┬───────┘
-                                                                 │
-                                                          Tag v* │
-                                                                 ▼
-                                                        ┌──────────────┐
-                                                        │ GitHub Draft │
-                                                        │   Release    │
-                                                        └──────────────┘
+
+</details>
+
+---
+
+## 🧱 Architecture
+
+```text
+┌──────────────────────┐
+│ Compose Screen       │ observes StateFlow<State>
+└──────────┬───────────┘
+           │ Action (sealed interface)
+           ▼
+┌──────────────────────┐
+│ ViewModel            │ @Koin viewModel { }
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│ Repository           │ Interface → Impl (Koin singleton)
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│ Room / DataStore     │ 6 entities · 6 DAOs · indexed FKs
+└──────────────────────┘
 ```
 
-- Gradle build **caching** enabled for fast CI
-- **concurrency groups** prevent redundant runs
-- All test results & APKs uploaded as artifacts
+Each screen follows a clear **MVI** flow: `State.kt` → `Action.kt` → `ViewModel.kt` → `Screen.kt`.
+This keeps state management explicit, makes side‑effects predictable, and keeps navigation and data
+logic out of the UI layer.
 
 ---
 
-## 🧪 Testing
+## 🧪 Testing & CI
 
-| Layer | Framework | What's Tested |
-|:------|:----------|:--------------|
-| ViewModel | JUnit + MockK + Turbine | State transitions, action dispatch, error handling |
-| Repository | JUnit + MockK | DAO delegation, null safety, CRUD operations |
-| Compose UI | Compose UI Testing | Screen rendering, title/content assertions |
+### Testing
 
----
+| Layer      | Framework               | What’s tested                                |
+|------------|-------------------------|----------------------------------------------|
+| ViewModel  | JUnit + MockK + Turbine | State transitions, intents, error handling   |
+| Repository | JUnit + MockK           | DAO delegation, null safety, CRUD operations |
+| Compose UI | Compose UI Testing      | Screen rendering, titles, content assertions |
 
-## 🏗️ Design Decisions
+### CI (GitHub Actions)
 
-- **No use cases for CRUD** — Repository access is enough for inserts/deletes/queries. Use cases reserved for complex multi-repo operations (reports, budget calculations).
-- **Navigation callbacks** — Screens emit `sealed interface Navigation` events; never hold navigation references.
-- **Client-side filtering** — Transactions screen loads all data reactively, applies filters/sort/search in the ViewModel.
-- **Per-tab back stacks** — Each bottom tab has an independent `NavBackStack`, preserving state across tab switches.
-- **Bottom bar auto-hide** — Detects non-tab routes via back stack entry inspection.
+- CI runs on `main` and `develop` pushes, and on pull requests to `main`.
+- Jobs: `lint` (Android lint + Detekt), `unit-tests` (JUnit/Turbine), `build` (debug + release APK),
+  and `release` (tagged `v*` GitHub Releases draft).
+- Badges at the top reflect the latest job status for this workflow, via GitHub’s official
+  workflow‑status endpoint, and update automatically on every run. [web:2][web:6]
 
 ---
 
 ## 🔐 Security
 
-- **Room** on-device only — no network permission required
-- **PIN lock** — 4-digit with confirmation flow, stored in DataStore
-- **Biometric** — fingerprint unlock (Android BiometricPrompt)
-- **No analytics, no ads, no cloud** — zero data exfiltration
-- **ProGuard/R8** minification for release builds
+- Room database is on‑device only — no network permission required.
+- 4‑digit PIN lock with confirmation, stored via DataStore.
+- Biometric unlock using Android `BiometricPrompt`.
+- No analytics, no ads, no cloud — zero data exfiltration.
+- ProGuard/R8 minification for release builds.
 
 ---
 
@@ -243,8 +271,4 @@ Open in **Android Studio Hedgehog+** → File → Open → select `NexLedger/` �
 
 MIT © [Act-Aks](https://github.com/Act-Aks)
 
----
-
-<div align="center">
-  <sub>Built with ❤️ by <a href="https://github.com/Act-Aks">Act-Aks</a></sub>
-</div>
+Built with ❤️ using Kotlin, Jetpack Compose, and modern Android tooling.
