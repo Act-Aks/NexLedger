@@ -1,14 +1,16 @@
-name: NexLedger CI
+name: NexLedger Auto Version & Release
 
 on:
   push:
-    branches: [ main, develop ]
-  pull_request:
     branches: [ main ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   # ── Lint & Static Analysis ──
@@ -75,13 +77,62 @@ jobs:
             */build/test-results/test*UnitTest/
             */build/reports/tests/test*UnitTest/
 
+  # ── Version bump via Kotlin CLI ──
+  version-bump:
+    name: Conventional Version Bump
+    runs-on: ubuntu-latest
+    needs: [ lint, unit-tests ]
+    if: startsWith(github.ref, 'refs/heads/main')
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-read-only: false
+
+      - name: Run conventional Android version bump
+        id: version
+        uses: ./.github/actions/conventional-android-version
+        with:
+          gradle_file: "app/build.gradle.kts"
+          tag_prefix: "v"
+
+      - name: Commit and push version bump + tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add app/build.gradle.kts
+          git commit -m "chore(release): ${{ steps.version.outputs.new_version }}" \
+            || echo "No changes to commit"
+
+          TAG="${{ steps.version.outputs.tag_name }}"
+          if [ -n "$TAG" ]; then
+            git tag "$TAG" || echo "Tag $TAG already exists"
+          fi
+
+          git push origin HEAD:main --follow-tags
+
   # ── Build (Debug + Release) ──
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: [ lint, unit-tests ]
+    needs: [ lint, unit-tests, version-bump ]
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Set up JDK 17
         uses: actions/setup-java@v5
@@ -94,7 +145,6 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/develop' }}
 
-      # 1) Recreate the keystore (.jks) from base64 secret
       - name: Create keystore file and keystore.properties
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
@@ -115,18 +165,16 @@ jobs:
         run: ./gradlew :app:assembleRelease --stacktrace
 
       - name: Upload release APK
-        if: github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v7
         with:
           name: release-apk
           path: app/build/outputs/apk/release/*.apk
 
-  # ── GitHub Release (tag v*) ──
+  # ── GitHub Release (using bumped tag) ──
   release:
     name: Create GitHub Release
-    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
-    needs: [ build ]
+    needs: [ build, version-bump ]
     steps:
       - name: Download release APK artifact
         uses: actions/download-artifact@v8
@@ -137,6 +185,9 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v3
         with:
-          files: app-release.apk
+          files: app-release.apk         # or "release-apk" name/path as you prefer
+          tag_name: ${{ needs.version-bump.outputs.tag_name || 'v' }} # see note below
           generate_release_notes: true
           draft: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

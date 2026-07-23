@@ -57,3 +57,6 @@ include(":feature:security")
 include(":feature:settings")
 include(":feature:statistics")
 include(":feature:transactions")
+
+// tools
+include(":tools:versioning-cli")

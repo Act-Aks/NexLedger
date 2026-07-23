@@ -1,0 +1,63 @@
+name: "Conventional Android Version"
+description: "Compute semantic version from conventional commits and update Gradle"
+
+inputs:
+  gradle_file:
+    description: "Path to app/build.gradle.kts relative to git root"
+    required: true
+    default: "app/build.gradle.kts"
+  tag_prefix:
+    description: "Prefix for version tags"
+    required: false
+    default: "v"
+
+outputs:
+  old_version:
+    description: "Previous version"
+    value: ${{ steps.version-cli.outputs.old_version }}
+  old_version_code:
+    description: "Previous versionCode"
+    value: ${{ steps.version-cli.outputs.old_version_code }}
+  new_version:
+    description: "New computed version"
+    value: ${{ steps.version-cli.outputs.new_version }}
+  new_version_code:
+    description: "New computed versionCode"
+    value: ${{ steps.version-cli.outputs.new_version_code }}
+  release_type:
+    description: "major|minor|patch|none"
+    value: ${{ steps.version-cli.outputs.release_type }}
+  tag_name:
+    description: "Tag name, e.g. v1.2.3"
+    value: ${{ steps.version-cli.outputs.tag_name }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build versioning CLI
+      shell: bash
+      run: |
+        ./gradlew :tools:versioning-cli:installDist
+
+    - name: Run versioning CLI
+      id: version-cli
+      shell: bash
+      run: |
+        CLI="./tools/versioning-cli/build/install/versioning-cli/bin/versioning-cli"
+
+        "$CLI" "${{ inputs.gradle_file }}" "${{ inputs.tag_prefix }}" \
+          > versioning-output.json
+
+        OLD_VERSION=$(jq -r '.oldVersion' versioning-output.json)
+        OLD_VERSION_CODE=$(jq -r '.oldVersionCode' versioning-output.json)
+        NEW_VERSION=$(jq -r '.newVersion' versioning-output.json)
+        NEW_VERSION_CODE=$(jq -r '.newVersionCode' versioning-output.json)
+        RELEASE_TYPE=$(jq -r '.releaseType' versioning-output.json)
+        TAG_NAME=$(jq -r '.tagName' versioning-output.json)
+
+        echo "old_version=${OLD_VERSION}" >> "$GITHUB_OUTPUT"
+        echo "old_version_code=${OLD_VERSION_CODE}" >> "$GITHUB_OUTPUT"
+        echo "new_version=${NEW_VERSION}" >> "$GITHUB_OUTPUT"
+        echo "new_version_code=${NEW_VERSION_CODE}" >> "$GITHUB_OUTPUT"
+        echo "release_type=${RELEASE_TYPE}" >> "$GITHUB_OUTPUT"
+        echo "tag_name=${TAG_NAME}" >> "$GITHUB_OUTPUT"
