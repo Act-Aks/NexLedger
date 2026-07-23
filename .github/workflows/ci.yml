@@ -107,9 +107,9 @@ jobs:
           echo "$KEYSTORE_BASE64" | base64 -d > $KEYSTORE_PATH
 
           touch app/keystore.properties
-          echo "storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}" >> app/keystore.properties
-          echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> app/keystore.properties
-          echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> app/keystore.properties
+          echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> app/keystore.properties
+          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> app/keystore.properties
+          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> app/keystore.properties
 
       - name: Build release APK
         run: ./gradlew :app:assembleRelease --stacktrace

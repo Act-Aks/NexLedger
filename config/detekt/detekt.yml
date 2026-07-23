@@ -1,35 +1,113 @@
-build:
-  maxIssues: 0
+config:
+  validation: true
+  warningsAsErrors: false
 
-style:
-  MagicNumber:
-    active: false
-  MaxLineLength:
-    maxLineLength: 140
-  WildcardImport:
-    active: false
-  UnusedImports:
-    active: true
-  ForbiddenComment:
-    active: true
-    values: [ "TODO:", "FIXME:", "STOPSHIP:" ]
+comments:
+  active: true
 
 complexity:
+  active: true
+
   LongParameterList:
-    functionThreshold: 8
-    constructorThreshold: 8
+    active: true
+    allowedFunctionParameters: 8
+    allowedConstructorParameters: 8
+    ignoreDefaultParameters: false
+    ignoreDataClasses: true
+
+  LongMethod:
+    active: true
+    allowedLines: 60
+    ignoreAnnotated:
+      - "Composable"
+    excludes:
+      - "**/presentation/**"
+      - "**/ui/**"
+      - "**/*Screen.kt"
+
+  TooManyFunctions:
+    active: true
+    allowedFunctionsPerFile: 11
+    allowedFunctionsPerClass: 11
+    allowedFunctionsPerInterface: 11
+    allowedFunctionsPerObject: 11
+    allowedFunctionsPerEnum: 11
+    ignoreOverridden: true
+    excludes:
+      - "**/core/database/dao/**"
+      - "**/core/database/repository/**"
 
 exceptions:
+  active: true
   TooGenericExceptionCaught:
+    active: false
+  SwallowedException:
     active: false
 
 naming:
+  active: true
+
   PackageNaming:
     active: true
+    packagePattern: "[a-z]+(\\.[a-z][a-z0-9]*)*"
+
   ClassNaming:
     active: true
+    classPattern: "[A-Z][a-zA-Z0-9]*"
+
   FunctionNaming:
     active: true
+    functionPattern: "[a-zA-Z][a-zA-Z0-9]*"
+    ignoreAnnotated:
+      - "Composable"
 
-formatting:
-  active: false
+  MatchingDeclarationName:
+    active: false
+
+style:
+  active: true
+
+  MagicNumber:
+    active: false
+
+  MaxLineLength:
+    active: true
+    maxLineLength: 140
+    excludePackageStatements: true
+    excludeImportStatements: true
+    excludeCommentStatements: false
+    excludeRawStrings: true
+
+  WildcardImport:
+    active: false
+
+  UnusedImport:
+    active: true
+
+  ForbiddenComment:
+    active: true
+    comments:
+      - "TODO:"
+      - "FIXME:"
+      - "STOPSHIP:"
+
+  NewLineAtEndOfFile:
+    active: false
+
+performance:
+  active: true
+
+potential-bugs:
+  active: true
+
+processors:
+  active: true
+
+empty-blocks:
+  active: true
+
+coroutines:
+  active: true
+
+console-reports:
+  active: true

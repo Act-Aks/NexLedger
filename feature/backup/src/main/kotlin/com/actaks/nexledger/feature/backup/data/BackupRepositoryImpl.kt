@@ -49,7 +49,9 @@ class BackupRepositoryImpl(
             val csv = buildString {
                 appendLine("id,amount,type,categoryId,accountId,date,note,merchant")
                 transactions.forEach { tx ->
-                    appendLine("${tx.id},${tx.amount},${tx.type},${tx.categoryId},${tx.accountId},${tx.date},\"${tx.note}\",\"${tx.merchant}\"")
+                    appendLine(
+                        "${tx.id},${tx.amount},${tx.type},${tx.categoryId},${tx.accountId},${tx.date},\"${tx.note}\",\"${tx.merchant}\""
+                    )
                 }
             }
             context.contentResolver.openOutputStream(uri)?.use { os ->

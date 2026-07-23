@@ -39,7 +39,7 @@ fun requiredKeystoreProp(name: String): String {
     }
     return (keystoreProperties.getProperty(name)?.trim()).takeUnless { it.isNullOrEmpty() }
         ?: throw GradleException(
-            "Missing required signing property '$name' in keystore.properties. Expected keys: storeFile, storePassword, keyAlias, keyPassword."
+            "Missing required signing property '$name' in keystore.properties. Expected keys: storePassword, keyAlias, keyPassword."
         )
 }
 
