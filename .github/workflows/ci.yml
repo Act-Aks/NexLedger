@@ -95,23 +95,21 @@ jobs:
           cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/develop' }}
 
       # 1) Recreate the keystore (.jks) from base64 secret
-      - name: Create keystore file
+      - name: Create keystore file and keystore.properties
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
           KEYSTORE_PATH: ${{ secrets.KEYSTORE_PATH }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
         run: |
           mkdir -p app
           echo "$KEYSTORE_BASE64" | base64 -d > $KEYSTORE_PATH
 
-      # 2) Recreate keystore.properties from secrets
-      - name: Create keystore.properties
-        run: |
-          cat > keystore.properties <<EOF
-          storeFile=${{ secrets.KEYSTORE_FILE_PATH }}
-          storePassword=${{ secrets.KEYSTORE_STORE_PASSWORD }}
-          keyAlias=${{ secrets.KEYSTORE_KEY_ALIAS }}
-          keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}
-          EOF
+          touch app/keystore.properties
+          echo "storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}" >> app/keystore.properties
+          echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> app/keystore.properties
+          echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> app/keystore.properties
 
       - name: Build release APK
         run: ./gradlew :app:assembleRelease --stacktrace

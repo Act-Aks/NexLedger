@@ -16,13 +16,12 @@ val isReleaseBuild: Boolean = gradle.startParameter.taskNames.any { task ->
 
 // Only enforce keystore.properties for release builds
 val keystoreProperties = Properties().apply {
-    val propsFile = rootProject.file("app/keystore.properties")
+    val propertiesFile = rootProject.file("app/keystore.properties")
 
-    if (!propsFile.exists()) {
+    if (!propertiesFile.exists()) {
         if (isReleaseBuild) {
             throw GradleException(
-                "Missing keystore.properties at ${propsFile.absolutePath}. " +
-                        "For release builds, create it locally or generate it in GitHub Actions."
+                "Missing keystore.properties at ${propertiesFile.absolutePath}. " + "For release builds, create it locally or generate it in GitHub Actions."
             )
         } else {
             // For debug / non‑release tasks, just return empty props
@@ -30,7 +29,7 @@ val keystoreProperties = Properties().apply {
         }
     }
 
-    load(FileInputStream(propsFile))
+    load(FileInputStream(propertiesFile))
 }
 
 fun requiredKeystoreProp(name: String): String {
@@ -40,8 +39,7 @@ fun requiredKeystoreProp(name: String): String {
     }
     return (keystoreProperties.getProperty(name)?.trim()).takeUnless { it.isNullOrEmpty() }
         ?: throw GradleException(
-            "Missing required signing property '$name' in keystore.properties. " +
-                    "Expected keys: storeFile, storePassword, keyAlias, keyPassword."
+            "Missing required signing property '$name' in keystore.properties. Expected keys: storeFile, storePassword, keyAlias, keyPassword."
         )
 }
 
@@ -61,16 +59,14 @@ android {
     signingConfigs {
         create("release") {
             if (isReleaseBuild) {
-                val storeFilePath = requiredKeystoreProp("storeFile")
                 val storePasswordValue = requiredKeystoreProp("storePassword")
                 val keyAliasValue = requiredKeystoreProp("keyAlias")
                 val keyPasswordValue = requiredKeystoreProp("keyPassword")
 
-                val storeFileRef = file(storeFilePath)
+                val storeFileRef = file("release.keystore")
                 if (!storeFileRef.exists()) {
                     throw GradleException(
-                        "Keystore file not found: ${storeFileRef.absolutePath}. " +
-                                "In CI, ensure app/nexledger-release.jks is created before assembleRelease."
+                        "Keystore file not found: ${storeFileRef.absolutePath}. " + "In CI, ensure app/release.keystore is created before assembleRelease."
                     )
                 }
 
@@ -89,8 +85,7 @@ android {
             }
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
         debug {
